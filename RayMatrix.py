@@ -118,7 +118,7 @@ def focusLConvex(n1, n2, R):
 
 # ### 右凸レンズでの屈折
 # 
-# 左凸レンズと同一？
+# ここでRは負の値
 # 
 #  \begin{align}
 #  \begin{pmatrix}
@@ -135,19 +135,19 @@ def focusLConvex(n1, n2, R):
 #  \end{pmatrix}
 #  \end{align}
 
-# In[30]:
+# In[51]:
 
 def refracRConvex(y1, th1, n1, n2, R):
     y2 = y1
-    th2 = - y1 * (n2 - n1) / (R * n2) + th1 * n1 / n2
+    th2 = y1 * (n2 - n1) / (R * n2) + th1 * n1 / n2
     return y2, th2
 
 
-# In[31]:
+# In[53]:
 
 # 右凸レンズの後ろ側焦点距離
 def focusRConvex(n1, n2, R):
-    return R * n2 / (n2 - n1)
+    return - R * n2 / (n2 - n1)
 
 
 # ### 薄肉レンズでの屈折
@@ -167,7 +167,7 @@ def focusRConvex(n1, n2, R):
 #  \end{pmatrix}
 #  \end{align}
 
-# In[34]:
+# In[37]:
 
 def refracConvex(y1, th1, focus):
     y2 = y1
@@ -175,12 +175,32 @@ def refracConvex(y1, th1, focus):
     return y2, th2
 
 
-# In[ ]:
+# In[60]:
+
+def refracConvex2(y1, th1, n1, n2, R):
+    y2, th2 = refracLConvex(y1, th1, n1, n2, R)
+    #print("y2:{0:.2f}, th2:{1:.2f}".format(y2, math.degrees(th2)))
+    y3, th3 = refracRConvex(y2, th2, n2, n1, R)
+    #print("y3:{0:.2f}, th3:{1:.2f}".format(y3, math.degrees(th3)))
+    return y3, th3
 
 
+# ### 焦点距離の合成
+# 
+#  \begin{align}
+#  \frac{1}{f_1} + \frac{1}{f_2} = \frac{1}{f}
+#  \end{align}
+
+# In[58]:
+
+def focusConvex(n1, n2, R):
+    f1 = focusLConvex(n1, n2, R)    
+    f2 = focusRConvex(n2, n1, R)
+    finv = 1.0 / f1 + 1.0 / f2
+    return 1.0 / finv
 
 
-# In[36]:
+# In[59]:
 
 # pyで保存。
 import subprocess
