@@ -23,9 +23,17 @@
 #   http://jupyter-notebook.readthedocs.io/en/latest/examples/Notebook/Typesetting%20Equations.html   
 #   こことか https://kogler.wordpress.com/2008/03/21/latex-use-of-math-symbols-formulas-and-equations/
 
-# In[10]:
+# In[24]:
 
 import math
+from Snell import snell
+
+
+# In[29]:
+
+# pyで保存。
+import subprocess
+subprocess.run(['jupyter', 'nbconvert', '--to', 'python', 'RayMatrix.ipynb'])
 
 
 # ### 移行行列
@@ -108,4 +116,13 @@ def refracLConvex(y1, th1, n1, n2, R):
     return y2, th2
 
 
-# 
+# In[28]:
+
+def focusLConvex(n1, n2, R):
+    return R * n1 / (n2 - n1)
+
+
+# In[ ]:
+
+
+
