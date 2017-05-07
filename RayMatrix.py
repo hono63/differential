@@ -29,7 +29,7 @@ import math
 from Snell import snell
 
 
-# In[29]:
+# In[33]:
 
 # pyで保存。
 import subprocess
@@ -116,10 +116,45 @@ def refracLConvex(y1, th1, n1, n2, R):
     return y2, th2
 
 
-# In[28]:
+# In[32]:
 
+# 左凸レンズの前側焦点距離
 def focusLConvex(n1, n2, R):
     return R * n1 / (n2 - n1)
+
+
+# ### 右凸レンズでの屈折
+# 
+# 左凸レンズと同一？
+# 
+#  \begin{align}
+#  \begin{pmatrix}
+#  y_2 \\
+#  \theta_2
+#  \end{pmatrix} = 
+#  \begin{pmatrix}
+#  1 & 0 \\
+#  -\frac{n_2-n_1}{Rn_2} & \frac{n_1}{n_2}
+#  \end{pmatrix}
+#  \begin{pmatrix}
+#  y_1 \\
+#  \theta_1
+#  \end{pmatrix}
+#  \end{align}
+
+# In[30]:
+
+def refracRConvex(y1, th1, n1, n2, R):
+    y2 = y1
+    th2 = - y1 * (n2 - n1) / (R * n2) + th1 * n1 / n2
+    return y2, th2
+
+
+# In[31]:
+
+# 右凸レンズの後ろ側焦点距離
+def focusRConvex(n1, n2, R):
+    return R * n2 / (n2 - n1)
 
 
 # In[ ]:
