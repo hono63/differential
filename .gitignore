@@ -1,3 +1,5 @@
 .ipynb_checkpoint*
 
 .DS_Store
+
+__pycache__/RayMatrix.cpython-36.pyc
