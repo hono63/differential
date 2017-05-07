@@ -29,13 +29,6 @@ import math
 from Snell import snell
 
 
-# In[33]:
-
-# pyで保存。
-import subprocess
-subprocess.run(['jupyter', 'nbconvert', '--to', 'python', 'RayMatrix.ipynb'])
-
-
 # ### 移行行列
 #  \begin{align}
 # y_2 = y_1 + d \tan \theta_1 \\
@@ -155,6 +148,43 @@ def refracRConvex(y1, th1, n1, n2, R):
 # 右凸レンズの後ろ側焦点距離
 def focusRConvex(n1, n2, R):
     return R * n2 / (n2 - n1)
+
+
+# ### 薄肉レンズでの屈折
+# 
+#  \begin{align}
+#  \begin{pmatrix}
+#  y_2 \\
+#  \theta_2
+#  \end{pmatrix} = 
+#  \begin{pmatrix}
+#  1 & 0 \\
+#  -\frac{1}{f} & 1
+#  \end{pmatrix}
+#  \begin{pmatrix}
+#  y_1 \\
+#  \theta_1
+#  \end{pmatrix}
+#  \end{align}
+
+# In[34]:
+
+def refracConvex(y1, th1, focus):
+    y2 = y1
+    th2 = - y1 / focus + th1
+    return y2, th2
+
+
+# In[ ]:
+
+
+
+
+# In[36]:
+
+# pyで保存。
+import subprocess
+subprocess.run(['jupyter', 'nbconvert', '--to', 'python', 'RayMatrix.ipynb'])
 
 
 # In[ ]:
